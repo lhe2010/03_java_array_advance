@@ -60,7 +60,7 @@ public class ArrayEx25_정답 {
 				break;
 			}
 		}
-		
+		scan.close();
 	
 	}
 }

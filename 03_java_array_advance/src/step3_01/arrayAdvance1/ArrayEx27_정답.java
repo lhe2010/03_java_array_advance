@@ -79,6 +79,8 @@ public class ArrayEx27_정답 {
 		}
 		System.out.println("[게임종료]");
 		
+		scan.close();
+		
 	}
 	
 }
