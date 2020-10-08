@@ -18,6 +18,10 @@ public class ArrayEx31_정답 {
 	public static void main(String[] args) {
 		
 		int[] scores = {10, 50, 30, 40, 80, 7};
+		
+		for (int i = 0; i < scores.length; i++) {
+			
+		}
 
 	}
 
