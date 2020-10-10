@@ -64,11 +64,11 @@ public class ArrayEx29_정답 {
 		System.out.println(Arrays.toString(me));
 		System.out.println(Arrays.toString(com));
 		*/
-		
-		
 		int turn = 0; // 10번만 돌립니다. 
 		while(isRun && turn < 10) {
-			
+			System.out.println();
+			System.out.println();
+			System.out.println();
 			System.out.println("\n숫자와 자리가 같으면 strike,\n숫자만 같고 자리가 틀리면 ball");
 			System.out.print("정답을 입력하세요: " );
 			
