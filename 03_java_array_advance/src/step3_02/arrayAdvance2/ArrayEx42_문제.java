@@ -1,4 +1,4 @@
-package step3_02.arrayAdvance2;
+package step3_02.arrayAdvance2; 
 
 import java.util.Scanner;
 

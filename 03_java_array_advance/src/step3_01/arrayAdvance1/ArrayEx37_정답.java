@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 /*
  *	# 2차원배열 기본문제[3단계]
-*/
+*/ 
 
 public class ArrayEx37_정답 {
 

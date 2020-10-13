@@ -44,7 +44,7 @@ public class ArrayEx41_정답T {
 					else if(j != ladder[i].length - 1 && ladder[i][j+1] == 1){
 						System.out.print(" ├─");
 					}
-					
+					  
 				}
 			}
 			System.out.println();

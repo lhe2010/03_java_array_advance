@@ -1,5 +1,5 @@
 // 2020-10-12 day17 1교시
-package step3_01.arrayAdvance1;
+package step3_01.arrayAdvance1; 
 // # 2차원 배열
 // 이차원배열에서 가로길이 : arr.length
 // ******* 세로길이 : arr[i].length

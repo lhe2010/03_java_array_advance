@@ -1,6 +1,6 @@
 package step3_01.arrayAdvance1;
 /*
- 
+  
  	중복 안된 숫자 제거
  	
 	int[] test1= {1,2,3,2,1};		

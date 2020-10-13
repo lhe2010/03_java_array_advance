@@ -4,7 +4,7 @@ package step3_01.arrayAdvance1;
 import java.util.Scanner;
 
 /*
- *	# 2차원배열 기본문제[2단계]
+ *	# 2차원배열 기본문제[2단계] 
 */
 
 public class ArrayEx36_정답 {

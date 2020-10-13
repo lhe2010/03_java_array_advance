@@ -5,7 +5,7 @@ package step3_01.arrayAdvance1;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/*
+/* 
  *	# 관리비
 */
 
