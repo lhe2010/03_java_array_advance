@@ -1,4 +1,5 @@
-// 2020-10-13 화 16:16-16:56 + 
+// 2020-10-13 화 16:16-16:56 + 2020-10-14 수 15:10-15:37
+// ******** 정답지 방법 보고 이해하기
 package step3_02.arrayAdvance2; 
 
 import java.util.Random;
@@ -63,7 +64,7 @@ public class ArrayEx43_정답 {
 			pX = ran.nextInt(SIZE);
 			pY = ran.nextInt(SIZE);
 			
-			if(map[pX][pY] != 9) {
+			if(map[pX][pY] != 9 && wallCount != 0) {
 				map[pX][pY] = 9;
 //				System.out.println("벽 좌표 : " + pX + " " + pY);
 				wallCount--;
@@ -86,6 +87,7 @@ public class ArrayEx43_정답 {
 			goalY = ran.nextInt(SIZE);
 		} while(map[goalX][goalY] != 0 && map[goalX][goalY] != 9 && map[goalX][goalY] != 3); // *** 조건 식!
 		map[goalX][goalY] = 7;
+		
 //		System.out.println("골대 좌표 : " + goalX + " " + goalY);
 		
 		// 테스트를 위한 화면 출력 - 벽설치9 + 공설치3 + 골대설치7 + 플레이어2 배치 후
@@ -115,7 +117,7 @@ public class ArrayEx43_정답 {
 		// ========================= 게임 시작 =============================
 		while(true) {
 			// 유저한테 보여줄 화면 출력
-			System.out.println("  0 1 2 3 4 5 6 ");
+			System.out.println("----------------\n  0 1 2 3 4 5 6 ");
 			for (int i = 0; i < SIZE; i++) {
 				System.out.print(i + "|");
 				for (int j = 0; j < SIZE; j++) {
@@ -132,7 +134,7 @@ public class ArrayEx43_정답 {
 				}
 				System.out.println();
 			}
-			
+			System.out.println("----------------\n");
 			
 			// 화면 이동키
 			System.out.print("이동할 방향입력(상1하2좌3우4) : ");
@@ -142,52 +144,71 @@ public class ArrayEx43_정답 {
 			case 1: // 상
 				// 안움직이는 경우: 위에 갈 인덱스 없으면/벽만나면/골대만나면
 				// 움직이는 경우 : 0이면 옮기고 공을 만나면 가지고간다.
-				if( pX-1 == -1 || map[pX-1][pY] ==  9 || map[pX-1][pY] == 7)
+				if( pX-1 == -1 || map[pX-1][pY] ==  9 || map[pX-1][pY] == 7) {
+					System.out.println("[ERROR] 더이상 이동할 수 없음!");
 					continue;
-				else if (map[pX-1][pY] == 0) { // 0은 이동가능
+				} else if (map[pX-1][pY] == 0) { // 0은 이동가능
 					map[pX][pY] = 0;
 					map[pX-1][pY] = 2; 
 					pX--;
-				}
-				else if (map[pX-1][pY] == 3 && ballX != 0) { // 공을만나면 (공이 맨위면 더 찰곳이없다. 예외처리)
+				} else if (map[pX-1][pY] == 3 && ballX != 0) { // 공을만나면 (공이 맨위면 더 찰곳이없다. 예외처리)
 					map[pX--][pY] = 0; 			
 					map[ballX--][ballY] = 2;	// 캐릭터 이동
 					map[ballX][ballY] = 3;  	// 공 차기
 				}
-				break;
-			case 2: // 하
-				if( pX+1 == 7 || map[pX+1][pY] ==  9 || map[pX+1][pY] == 7)
+				break; 
+			case 2: // 하 // X가 행 Y가 열 // map[pX][pY]
+				if( pX+1 == 7 || map[pX+1][pY] ==  9 || map[pX+1][pY] == 7) {
+					System.out.println("[ERROR] 더이상 이동할 수 없음!");
 					continue;
-				else if (map[pX+1][pY] == 0) {	// 0은 이동가능
+				} else if (map[pX+1][pY] == 0) {	// 0은 이동가능
 					map[pX][pY] = 0;
-					map[pX+1][pY] = 2; 
-					pX++;
-				}
-				else if (map[pX+1][pY] == 3 && ballX != 6) { // 공을만나면 (공이 맨아래면 더 찰곳이없다. 예외처리)
-					map[pX++][pY] = 0; 			
-					map[ballX++][ballY] = 2;	// 캐릭터 이동
-					map[ballX][ballY] = 3;  	// 공 차기
+					map[++pX][pY] = 2; 
+				} else if (map[pX+1][pY] == 3 && ballX != 6) { // 공을만나면 (공이 맨아래면 더 찰곳이없다. 예외처리)
+					map[pX++][pY] = 0; 			// pX+1 = ballX, pY = ballY	
+					map[pX][pY] = 2;			// 캐릭터 이동
+					map[++ballX][ballY] = 3;  	// 공 차기
 				}
 				break;
-			case 3: // 좌
-				if( pY-1 == -1 || map[pX][pY-1] ==  9 || map[pX][pY-1] == 7)
+			case 3: // 좌 // X가 행 Y가 열 // map[pX][pY]
+				// 안움직이는 경우: 좌로 갈 인덱스 없으면/벽만나면/골대만나면
+				// 움직이는 경우 : 0이면 옮기고 공을 만나면 가지고간다.
+				if( pY-1 == -1 || map[pX][pY-1] ==  9 || map[pX][pY-1] == 7) {
+					System.out.println("[ERROR] 더이상 이동할 수 없음!");
 					continue;
-				else if (map[pX][pY-1] == 0) {	// 0은 이동가능
+				} else if (map[pX][pY-1] == 0) {	// 0은 이동가능
 					map[pX][pY] = 0;
-					map[pX][pY--] = 2; 
-				}
-				else if (map[pX][pY-1] == 3 && ballX != 0) { // 공을만나면 (공이 맨아래면 더 찰곳이없다. 예외처리)
-					map[pX][pY--] = 0; 			
-					map[ballX][ballY--] = 2;	// 캐릭터 이동
-					map[ballX][ballY] = 3;  	// 공 차기
+					map[pX][--pY] = 2; 
+				} else if (map[pX][pY-1] == 3 && ballY != 0) { // 공을만나면 (공이 맨아래면 더 찰곳이없다. 예외처리)
+					map[pX][pY] = 0; 			
+					map[pX][--pY] = 2;			// 캐릭터 이동
+					map[ballX][--ballY] = 3;  	// 공 차기
 				}
 				break;
-			case 4: // 우
-				default:
+			case 4: // 우 // X가 행 Y가 열 // map[pX][pY]
+				// 안움직이는 경우: 우로 갈 인덱스 없으면/벽만나면/골대만나면
+				// 움직이는 경우 : 0이면 옮기고 공을 만나면 가지고간다.
+				if( pY+1 == 7 || map[pX][pY+1] ==  9 || map[pX][pY+1] == 7) {
+					System.out.println("[ERROR] 더이상 이동할 수 없음!");
+					continue;
+				} else if (map[pX][pY+1] == 0) {	// 0은 이동가능
+					map[pX][pY] = 0;
+					map[pX][++pY] = 2; 
+				} else if (map[pX][pY+1] == 3 && ballY != 6 ) { // 공을만나면 (공이 맨아래면 더 찰곳이없다. 예외처리)
+					map[pX][pY] = 0; 			
+					map[pX][++pY] = 2;			// 캐릭터 이동
+					map[ballX][++ballY] = 3;  	// 공 차기
+				}
+				break;
 			}
-
+			
+			// 골대에 공이 들어가면 이김 
+			if( ballX == goalX && ballY == goalY) {
+				System.out.println("[ WIN ] 골대에 공이 들어갔습니다!!! ");
+				break; // 게임종료
+			}
 		}
-//		scan.close();
+		scan.close();
 	}
 
 }
