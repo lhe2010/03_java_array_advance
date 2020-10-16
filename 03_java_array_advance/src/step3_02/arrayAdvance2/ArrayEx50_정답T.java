@@ -8,12 +8,10 @@ package step3_02.arrayAdvance2;
  * 14	23	22	21	8	
  * 13	12	11	10	9
  * 
- * 
  * 1) 오른쪽 방향으로 순서대로 숫자저장
  * 2) 아래쪽 방향으로 순서대로 숫자저장
  * 3) 왼쪽 방향으로 순서대로 숫자저장
  * 4) 윗쪽 방향으로 순서대로 숫자저장
- * 
  * 1)2)3)4) 반복
  */
 
@@ -39,27 +37,28 @@ public class ArrayEx50_정답T {
 			int yy = y;
 			int xx = x;
 			
-			if      (dir == 1)  xx = xx + 1;
-			else if (dir == 2)  yy = yy + 1;
-			else if (dir == 3) 	xx = xx - 1;
-			else if (dir == 4) 	yy = yy - 1;
+			if      (dir == 1)  xx++;
+			else if (dir == 2)  yy++;
+			else if (dir == 3) 	xx--;
+			else if (dir == 4) 	yy--;
 			
+			// 벽을 만났을 때 방향바꾸는 처리 
 			if (size <= xx || xx < 0 || size <= yy || yy < 0 || check[yy][xx] == true) {
 				
-				dir = dir + 1;
+				dir++;
+	
 				yy = y;
 				xx = x;
 				
 				if (dir == 5) 		dir = 1;
 				
-				if 		(dir == 1) 	xx = xx + 1;
-				else if (dir == 2) 	yy = yy + 1;
-				else if (dir == 3) 	xx = xx - 1;
-				else if (dir == 4) 	yy = yy - 1;
+				if 		(dir == 1) 	xx++;
+				else if (dir == 2) 	yy++;
+				else if (dir == 3) 	xx--;
+				else if (dir == 4) 	yy--;
 				
 			}
-			
-			num = num + 1;
+			num++;
 			
 			y = yy;
 			x = xx;
@@ -67,10 +66,10 @@ public class ArrayEx50_정답T {
 			map[y][x] = num;
 			check[y][x] = true;
 			
-			System.out.println("y =  " + y + ", x = " + x);
-			
+			System.out.println("y =  " + y + ", x = " + x + ", num = " + num);
 		}
 		
+		// map 배열 프린트
 		for (int i=0; i<5; i++) {
 			for (int j=0; j<5; j++) {
 				System.out.print(map[i][j] + "\t");
@@ -79,6 +78,7 @@ public class ArrayEx50_정답T {
 		}
 		System.out.println();
 		
+		// check 배열 프린트
 		for (int i=0; i<5; i++) {
 			for (int j=0; j<5; j++) {
 				System.out.print(check[i][j] + "\t");
